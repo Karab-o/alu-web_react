@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -16,23 +15,43 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
   },
   devServer: {
-    static: path.resolve(__dirname, 'public'),
+    contentBase: path.resolve(__dirname, 'public'),
     port: 8564,
     open: true,
   },
   performance: {
-    maxAssetSize: 1000000,
-    maxEntrypointSize: 1000000,
+    hints: false,
   },
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpe?g|gif)$/i,
-        type: 'asset/resource',
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 65,
+              },
+              optipng: {
+                enabled: false,
+              },
+              pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+            },
+          },
+        ],
       },
     ],
   },
@@ -40,14 +59,6 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
     },
-    minimizer: [
-      '...',
-      new ImageMinimizerPlugin({
-        minimizer: {
-          implementation: ImageMinimizerPlugin.sharpMinify,
-        },
-      }),
-    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
