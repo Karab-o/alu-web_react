@@ -1,0 +1,6 @@
+footer,
+body > p:last-child {
+  font-style: italic;
+  text-align: center;
+  color: #555555;
+}
