@@ -1,0 +1,5 @@
+node_modules/
+package-lock.json
+build/
+task_5/dashboard/dist/bundle.js
+*.log
