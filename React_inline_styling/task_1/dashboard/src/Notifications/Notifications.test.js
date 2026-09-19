@@ -33,7 +33,7 @@ describe('Notifications when displayDrawer is false', () => {
   });
 
   it('displays the menu item', () => {
-    expect(wrapper.find('div.menuItem')).toHaveLength(1);
+    expect(wrapper.find('div[className^="menuItem"]')).toHaveLength(1);
   });
 
   it('does not display div.Notifications', () => {
@@ -49,7 +49,7 @@ describe('Notifications when displayDrawer is true', () => {
   });
 
   it('displays the menu item', () => {
-    expect(wrapper.find('div.menuItem')).toHaveLength(1);
+    expect(wrapper.find('div[className^="menuItem"]')).toHaveLength(1);
   });
 
   it('displays div.Notifications', () => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Notifications.css';
 
 function NotificationItem({ type, html, value, id, markAsRead }) {
   return html ? (

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
-import './Notifications.css';
 import closeIcon from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
@@ -27,7 +26,7 @@ class Notifications extends React.Component {
 
     return (
       <>
-        <div className="menuItem">Your notifications</div>
+        <div className={css(styles.menuItem)}>Your notifications</div>
         {displayDrawer && (
           <div className={css(styles.notifications)}>
             <button
@@ -64,6 +63,12 @@ class Notifications extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  menuItem: {
+    textAlign: 'right',
+    padding: '10px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+  },
   notifications: {
     position: 'relative',
     border: '3px dashed #e1354b',
